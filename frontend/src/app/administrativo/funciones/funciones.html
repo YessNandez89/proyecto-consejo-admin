@@ -1,0 +1,169 @@
+<!-- BOTÓN VOLVER -->
+
+<button routerLink="/administrativo" class="btn-volver">
+  ⬅ Volver
+</button>
+
+<h2>Funciones del Administrador</h2>
+
+<!-- BOTÓN AGREGAR -->
+
+<button routerLink="/agregar-funcion" class="btn-agregar">
+  ➕ Agregar Función
+</button>
+
+<!-- TABLA -->
+
+<table>
+
+  <thead>
+
+    <tr>
+
+      <th>Función</th>
+      <th>Responsable</th>
+      <th>Fecha Límite</th>
+      <th>Estado</th>
+
+    </tr>
+
+  </thead>
+
+  <tbody>
+
+    <!-- EJEMPLOS FIJOS -->
+
+    <tr>
+
+      <td>
+        Presentar informe mensual
+      </td>
+
+      <td>
+        Administrador
+      </td>
+
+      <td>
+        2026-04-30
+      </td>
+
+      <td>
+
+        <div class="estado-container">
+
+          <span class="circulo circulo-amarillo"></span>
+
+          <span>
+            Pendiente
+          </span>
+
+        </div>
+
+      </td>
+
+    </tr>
+
+    <tr>
+
+      <td>
+        Gestionar mantenimiento zonas comunes
+      </td>
+
+      <td>
+        Administrador
+      </td>
+
+      <td>
+        2026-05-15
+      </td>
+
+      <td>
+
+        <div class="estado-container">
+
+          <span class="circulo circulo-verde"></span>
+
+          <span>
+            Cumplido
+          </span>
+
+        </div>
+
+      </td>
+
+    </tr>
+
+    <tr>
+
+      <td>
+        Actualizar contratos proveedores
+      </td>
+
+      <td>
+        Administrador
+      </td>
+
+      <td>
+        2025-12-10
+      </td>
+
+      <td>
+
+        <div class="estado-container">
+
+          <span class="circulo circulo-rojo"></span>
+
+          <span>
+            Vencido
+          </span>
+
+        </div>
+
+      </td>
+
+    </tr>
+
+    <!-- FILAS DINÁMICAS (LAS QUE GUARDAS) -->
+
+    <tr *ngFor="let f of listaFunciones">
+
+      <td>
+        {{ f.funcion }}
+      </td>
+
+      <td>
+        {{ f.responsable }}
+      </td>
+
+      <td>
+        {{ f.fecha }}
+      </td>
+
+      <td>
+
+        <div class="estado-container">
+
+          <span
+            class="circulo"
+            [ngClass]="{
+              'circulo-amarillo': calcularEstado(f.fecha, f.estado) === 'Pendiente',
+              'circulo-verde': calcularEstado(f.fecha, f.estado) === 'Cumplido' || calcularEstado(f.fecha, f.estado) === 'En tiempo',
+              'circulo-rojo': calcularEstado(f.fecha, f.estado) === 'Vencido'
+            }"
+          ></span>
+
+          <span>
+
+            {{ calcularEstado(f.fecha, f.estado) }}
+
+          </span>
+
+        </div>
+
+      </td>
+
+    </tr>
+
+  </tbody>
+
+</table>
