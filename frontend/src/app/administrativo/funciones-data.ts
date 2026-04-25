@@ -12,6 +12,20 @@ export class FuncionesDataService {
       responsable: 'Administrador',
       fecha: '2026-04-30',
       estado: 'Pendiente'
+    },
+
+    {
+      funcion: 'Gestionar mantenimiento zonas comunes',
+      responsable: 'Administrador',
+      fecha: '2026-05-15',
+      estado: 'Cumplido'
+    },
+
+    {
+      funcion: 'Actualizar contratos proveedores',
+      responsable: 'Administrador',
+      fecha: '2025-12-10',
+      estado: 'Pendiente'
     }
 
   ];

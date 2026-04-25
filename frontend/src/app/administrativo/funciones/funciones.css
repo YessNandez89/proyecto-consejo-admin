@@ -136,3 +136,69 @@ tr:hover {
   background-color: #e74c3c;
 
 }
+.alerta {
+
+  color: #e74c3c;
+
+  font-weight: bold;
+
+}
+table {
+
+  width: 100%;
+  border-collapse: collapse;
+
+}
+
+th, td {
+
+  padding: 10px;
+  text-align: left;
+  vertical-align: middle;
+
+}
+
+.estado-container {
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+}
+
+.alerta {
+
+  color: #e74c3c;
+  font-weight: bold;
+
+}
+.prioridad-alta {
+
+  color: white;
+  background-color: #e74c3c;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+
+}
+
+.prioridad-media {
+
+  color: black;
+  background-color: #f1c40f;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+
+}
+
+.prioridad-baja {
+
+  color: white;
+  background-color: #27ae60;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+
+}
+

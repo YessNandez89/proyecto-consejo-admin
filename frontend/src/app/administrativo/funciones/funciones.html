@@ -12,6 +12,24 @@
   ➕ Agregar Función
 </button>
 
+<!-- INDICADORES -->
+
+<div class="indicadores">
+
+  <div class="indicador verde">
+    🟢 Cumplidas: {{ cumplidas }}
+  </div>
+
+  <div class="indicador amarillo">
+    🟡 Pendientes: {{ pendientes }}
+  </div>
+
+  <div class="indicador rojo">
+    🔴 Vencidas: {{ vencidas }}
+  </div>
+
+</div>
+
 <!-- TABLA -->
 
 <table>
@@ -22,7 +40,9 @@
 
       <th>Función</th>
       <th>Responsable</th>
+      <th>Prioridad</th>
       <th>Fecha Límite</th>
+      <th>Días restantes</th>
       <th>Estado</th>
 
     </tr>
@@ -31,113 +51,68 @@
 
   <tbody>
 
-    <!-- EJEMPLOS FIJOS -->
-
-    <tr>
-
-      <td>
-        Presentar informe mensual
-      </td>
-
-      <td>
-        Administrador
-      </td>
-
-      <td>
-        2026-04-30
-      </td>
-
-      <td>
-
-        <div class="estado-container">
-
-          <span class="circulo circulo-amarillo"></span>
-
-          <span>
-            Pendiente
-          </span>
-
-        </div>
-
-      </td>
-
-    </tr>
-
-    <tr>
-
-      <td>
-        Gestionar mantenimiento zonas comunes
-      </td>
-
-      <td>
-        Administrador
-      </td>
-
-      <td>
-        2026-05-15
-      </td>
-
-      <td>
-
-        <div class="estado-container">
-
-          <span class="circulo circulo-verde"></span>
-
-          <span>
-            Cumplido
-          </span>
-
-        </div>
-
-      </td>
-
-    </tr>
-
-    <tr>
-
-      <td>
-        Actualizar contratos proveedores
-      </td>
-
-      <td>
-        Administrador
-      </td>
-
-      <td>
-        2025-12-10
-      </td>
-
-      <td>
-
-        <div class="estado-container">
-
-          <span class="circulo circulo-rojo"></span>
-
-          <span>
-            Vencido
-          </span>
-
-        </div>
-
-      </td>
-
-    </tr>
-
-    <!-- FILAS DINÁMICAS (LAS QUE GUARDAS) -->
-
     <tr *ngFor="let f of listaFunciones">
+
+      <!-- FUNCIÓN -->
 
       <td>
         {{ f.funcion }}
       </td>
 
+      <!-- RESPONSABLE -->
+
       <td>
         {{ f.responsable }}
       </td>
 
+      <!-- PRIORIDAD -->
+
+      <td>
+
+  <span
+    [ngClass]="obtenerClasePrioridad(f.prioridad)"
+  >
+
+    {{ f.prioridad }}
+
+  </span>
+
+</td>
+
+
+      <!-- FECHA -->
+
       <td>
         {{ f.fecha }}
       </td>
+
+      <!-- DÍAS RESTANTES -->
+
+      <td>
+
+        <ng-container
+          *ngIf="calcularDiasRestantes(f.fecha) as dias">
+
+          <span *ngIf="dias >= 0">
+
+            {{ dias }} días
+
+          </span>
+
+          <span
+            *ngIf="dias < 0"
+            class="alerta"
+          >
+
+            ⚠️ {{ dias * -1 }} días vencidos
+
+          </span>
+
+        </ng-container>
+
+      </td>
+
+      <!-- ESTADO -->
 
       <td>
 
@@ -147,7 +122,7 @@
             class="circulo"
             [ngClass]="{
               'circulo-amarillo': calcularEstado(f.fecha, f.estado) === 'Pendiente',
-              'circulo-verde': calcularEstado(f.fecha, f.estado) === 'Cumplido' || calcularEstado(f.fecha, f.estado) === 'En tiempo',
+              'circulo-verde': calcularEstado(f.fecha, f.estado) === 'Cumplido',
               'circulo-rojo': calcularEstado(f.fecha, f.estado) === 'Vencido'
             }"
           ></span>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { FuncionesDataService } from '../funciones-data';
@@ -7,7 +7,8 @@ import { FuncionesDataService } from '../funciones-data';
 @Component({
   selector: 'app-agregar-funcion',
 
-  imports: [FormsModule],
+  // 🔴 AQUÍ ESTABA EL ERROR
+  imports: [FormsModule, RouterLink],
 
   templateUrl: './agregar-funcion.html',
   styleUrl: './agregar-funcion.css',
@@ -18,6 +19,8 @@ export class AgregarFuncion {
   responsable = '';
   fecha = '';
   estado = 'Pendiente';
+  prioridad = 'Media';
+
 
   constructor(
     private funcionesService: FuncionesDataService,
@@ -28,15 +31,18 @@ export class AgregarFuncion {
 
     const nuevaFuncion = {
 
-      funcion: this.funcion,
-      responsable: this.responsable,
-      fecha: this.fecha,
-      estado: this.estado
+  funcion: this.funcion,
+  responsable: this.responsable,
+  fecha: this.fecha,
+  estado: this.estado,
+  prioridad: this.prioridad
 
-    };
+};
+
 
     this.funcionesService.agregarFuncion(nuevaFuncion);
 
+    // 🔵 Esto ya estaba bien
     this.router.navigate(['/funciones']);
 
   }
