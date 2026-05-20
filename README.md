@@ -84,3 +84,41 @@ Pendiente:
 
 Yesid Hernandez  
 Proyecto en desarrollo para gestión de consejos de administración.
+
+BITÁCORA DE DESARROLLO
+
+Fecha:
+19/05/2026
+
+Módulo trabajado:
+Administrativo → Funciones
+
+Avances realizados:
+
+- Se implementó columna de prioridad:
+  Alta / Media / Baja
+
+- Se implementó cálculo dinámico de:
+  días restantes y días vencidos
+
+- Se agregaron alertas visuales:
+  ⚠️ vencido
+  ✔ cumplido
+
+- Se implementaron indicadores:
+  cumplidas / pendientes / vencidas
+
+- Se implementaron filtros dinámicos:
+  por estado y prioridad
+
+- Se agregaron botones de acciones:
+  editar y eliminar
+
+- Eliminación de tareas funcional
+
+Pendiente:
+
+- Finalizar funcionalidad editar tarea
+- Persistencia de datos
+- Buscador dinámico
+  ..
