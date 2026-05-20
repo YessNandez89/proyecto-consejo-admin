@@ -44,6 +44,7 @@
       <th>Fecha Límite</th>
       <th>Días restantes</th>
       <th>Estado</th>
+      <th>Acciones</th>
 
     </tr>
 
@@ -51,7 +52,7 @@
 
   <tbody>
 
-    <tr *ngFor="let f of listaFunciones">
+    <tr *ngFor="let f of listaFiltrada">
 
       <!-- FUNCIÓN -->
 
@@ -136,9 +137,67 @@
         </div>
 
       </td>
+      <td>
+
+  <button
+    class="btn-editar"
+    (click)="editarFuncion(f)"
+  >
+
+    ✏ Editar
+
+  </button>
+
+  <button
+    class="btn-eliminar"
+    (click)="eliminarFuncion(f)"
+  >
+
+    🗑 Eliminar
+
+  </button>
+
+  </td>
 
     </tr>
 
   </tbody>
+  <!-- FILTROS -->
 
+<div class="filtros">
+
+  <!-- ESTADOS -->
+
+  <button (click)="filtrarEstado('Todas')">
+    Todas
+  </button>
+
+  <button (click)="filtrarEstado('Pendiente')">
+    Pendientes
+  </button>
+
+  <button (click)="filtrarEstado('Cumplido')">
+    Cumplidas
+  </button>
+
+  <button (click)="filtrarEstado('Vencido')">
+    Vencidas
+  </button>
+
+  <!-- PRIORIDADES -->
+
+  <button (click)="filtrarPrioridad('Alta')">
+    Alta
+  </button>
+
+  <button (click)="filtrarPrioridad('Media')">
+    Media
+  </button>
+
+  <button (click)="filtrarPrioridad('Baja')">
+    Baja
+  </button>
+
+</div>
+  
 </table>

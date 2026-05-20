@@ -20,6 +20,10 @@ export class Funciones implements OnInit {
   cumplidas = 0;
   pendientes = 0;
   vencidas = 0;
+  modoEdicion = false;
+  funcionEditando: any = null;
+
+  listaFiltrada: any[] = [];
 
   constructor(private funcionesService: FuncionesDataService) {}
 
@@ -35,12 +39,15 @@ export class Funciones implements OnInit {
 
   cargarFunciones() {
 
-    this.listaFunciones =
-      this.funcionesService.obtenerFunciones();
+  this.listaFunciones =
+    this.funcionesService.obtenerFunciones();
 
-    this.contarEstados();
+  // 🔵 Mostrar todas al iniciar
+  this.listaFiltrada = this.listaFunciones;
 
-  }
+  this.contarEstados();
+
+}
 
   // 🔵 Lógica correcta del estado
 
@@ -189,5 +196,66 @@ obtenerClaseDias(fecha: string, prioridad: string) {
     }
 
   }
+    editarFuncion(funcion: any) {
+
+    this.funcionEditando = funcion;
+
+    this.modoEdicion = true;
 
 }
+
+eliminarFuncion(funcion: any) {
+
+  const confirmar =
+    confirm('¿Deseas eliminar esta función?');
+
+  if (!confirmar) {
+
+    return;
+
+  }
+
+  this.listaFunciones =
+    this.listaFunciones.filter(f => f !== funcion);
+
+  this.listaFiltrada =
+    this.listaFunciones;
+
+  this.contarEstados();
+
+}
+ filtrarEstado(estado: string) {
+
+  if (estado === 'Todas') {
+
+    this.listaFiltrada =
+      this.listaFunciones;
+
+    return;
+
+  }
+
+  this.listaFiltrada =
+    this.listaFunciones.filter(f =>
+
+      this.calcularEstado(f.fecha, f.estado) === estado
+
+    );
+
+}
+
+filtrarPrioridad(prioridad: string) {
+
+  this.listaFiltrada =
+    this.listaFunciones.filter(f =>
+
+      f.prioridad === prioridad
+
+    );
+
+} 
+
+
+}
+
+
